@@ -1,9 +1,11 @@
 import os
 import shutil
+import sys
 
 from block_markdown import extract_title, markdown_to_html_node
 from htmlnode import LeafNode, HTMLNode
-from main import basepath
+
+basepath = sys.argv[1] if len(sys.argv) > 1 else './'
 
 def refresh_file(dest_path):
     if os.path.exists(dest_path):
@@ -23,6 +25,7 @@ def copy_path(source_path, dest_path):
             copy_path(new_source_path,new_dest_path)
 
 def generate_page(from_path, template_path, dest_path):
+    basepath = sys.argv[1] if len(sys.argv) > 1 else './'
     print(f"Generating page from {from_path} to {dest_path} using {template_path}")
     source_file = open(from_path, 'r')
     source_markdown = source_file.read()
