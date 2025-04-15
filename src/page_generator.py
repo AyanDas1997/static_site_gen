@@ -3,6 +3,7 @@ import shutil
 
 from block_markdown import extract_title, markdown_to_html_node
 from htmlnode import LeafNode, HTMLNode
+from main import basepath
 
 def refresh_file(dest_path):
     if os.path.exists(dest_path):
@@ -29,7 +30,7 @@ def generate_page(from_path, template_path, dest_path):
     template = template_file.read()
     html_string = markdown_to_html_node(source_markdown).to_html()
     title = extract_title(source_markdown)
-    html = template.replace('{{ Title }}',title).replace('{{ Content }}',html_string)
+    html = template.replace('{{ Title }}',title).replace('{{ Content }}',html_string).replace('href="/',f'href="{basepath}').replace('src="/',f'src="{basepath}')
     dest_file = open(dest_path, 'w')
     dest_file.write(html)
     source_file.close()
