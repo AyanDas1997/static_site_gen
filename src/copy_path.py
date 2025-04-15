@@ -44,4 +44,4 @@ def generate_page_recursively(from_path, template_path, dest_path):
             generate_page(new_from_path,template_path, new_dest_path)
         else:
             os.makedirs(new_dest_path, exist_ok=True)
-            generate_page(new_from_path, template_path, new_dest_path)
+            generate_page_recursively(new_from_path, template_path, new_dest_path)
